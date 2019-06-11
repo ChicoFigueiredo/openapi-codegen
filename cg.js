@@ -171,6 +171,7 @@ function main(s) {
     if (argv.verbose) console.log('Loaded definition '+defName);
 
     if (o && o.openapi) {
+        console.log('configName:',configName,' finish:',finish)
         processor.main(o,config,configName,finish);
     }
     else {
