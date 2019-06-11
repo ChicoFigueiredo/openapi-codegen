@@ -140,8 +140,10 @@ function specificationExtensions(obj) {
 function convertOperation(op,verb,path,pathItem,obj,api) {
     let operation = {};
     operation.httpMethod = verb.toUpperCase();
+    operation.httpMethodLowerCase = verb.toLowerCase();
     if (obj.httpMethodCase === 'original') operation.httpMethod = verb; // extension
     operation.path = path;
+    operation.pathWithParam = path.replace(/[{](.*?)[}]/gmi,':$1');
     operation.replacedPathName = path; //?
 
     operation.operationId = op.operationId||('operation'+obj.openapi.operationCounter++);
