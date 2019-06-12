@@ -1,0 +1,28 @@
+{{>licenseInfo}}
+import { mongoose } from './index';
+//import * as models from './models';
+
+{{#models}}
+{{#model}}
+{{#description}}
+/**
+ * {{{description}}}
+ */
+{{/description}}
+export const {{classname}}Schema = new mongoose.Schema{
+{{#vars}}
+{{#description}}    /* {{{description}}} */{{/description}}
+    "{{name}}": {"type":{{{type}}},"index":false,"unique":false,"required":false,"trim":true, {{#isEnum}}"enum": [{{#allowableValues}}{{#enumVars}}{{{value}}}{{^-last}},{{/-last}}{{/enumVars}}{{/allowableValues}}],{{/isEnum}}
+   
+  {{#vendorExtensions}}
+    {{#x-mongose-trim}}
+        s={{{x-mongose-trim}}}
+    {{/x-mongose-trim}}
+  {{/vendorExtensions}}
+    
+  
+{{/vars}}
+} 
+
+{{/model}}
+{{/models}}

@@ -1,0 +1,32 @@
+import {{name}}Service from '../service/{{name}}.service';
+import { Request, Response } from 'express';
+
+export class {{name}}Controller {
+    {{#operations}}
+    {{#operation}}
+
+    {{nickname}}(req: Request, res: Response): void {
+      {{#pathParams}}
+        let {{paramName}} = req.body['{{paramName}}'].value;  // path param
+      {{/pathParams}}
+      {{#queryParams}}
+        let {{paramName}} = req.body['{{paramName}}'].value; // params param
+      {{/queryParams}}
+      {{#headerParams}}
+        let {{paramName}} = req.headers['{{paramName}}'].value; // path param
+      {{/headerParams}}
+      {{#hasBodyParam}}
+        let body = req.body; // body param
+      {{/hasBodyParam}}
+      
+      {{name}}Service.{{nickname}}({{#allParams}}{{paramName}}{{#hasMore}},{{/hasMore}}{{/allParams}}).then(r => {
+            if (r) res.json(r);
+            else r.status(404).end();
+        }).catch(r => {
+            r.status(501).end();
+        });
+    };
+    {{/operation}}
+    {{/operations}}
+} 
+export default new {{name}}Controller();

@@ -1,0 +1,12 @@
+'use strict';
+var utils = require('../utils/writer.js');
+
+import express from 'express';
+import {{name}}Controller  from '../controller/{{name}}.controller'
+
+export default express.Router()
+{{#operations}}
+{{#operation}}
+    .{{httpMethodLowerCase}}('{{pathWithParam}}', {{name}}Controller.{{nickname}})
+{{/operation}}
+{{/operations}}

@@ -1,0 +1,30 @@
+{
+    "defaults": {
+        "language": "typescript",
+        "supportsES6": true,
+        "classPrefix": "",
+        "gitUserId": "mermade",
+        "gitRepoId": "change-me",
+        "releaseNote": "Initial commit",
+        "npmName": "change-me",
+        "npmVersion": "1.0.0",
+        "npmRepository": "https://github.com/mermade/change-me"
+    },
+    "directories": [ "model", "controllers", "api", "api/controller", "api/service", "api/router", "api/db"  ],
+    "partials": {
+        "licenseInfo": "licenseInfo.mustache"
+    },
+    "transformations": [
+        { "input": "models.mustache", "output": "model/index.ts" },
+        { "input": "routes.mustache", "output": "api/routes.ts" }
+    ],
+    "perModel": [
+        { "input": "model.mustache", "output": "model/{{#models}}{{#model}}{{name}}{{/model}}{{/models}}.ts" },
+        { "input": "mongoose-schema.mustache", "output": "api/db/{{#models}}{{#model}}{{name}}{{/model}}{{/models}}.schema.ts" }
+    ],
+    "perApi": [
+        { "input": "controller.mustache", "output": "api/controller/{{name}}.controller.ts" },
+        { "input": "service.mustache", "output": "api/service/{{name}}.service.ts" },
+        { "input": "router.mustache", "output": "api/router/{{name}}.router.ts" }
+    ]
+}

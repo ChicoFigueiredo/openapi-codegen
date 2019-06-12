@@ -1,0 +1,20 @@
+/*
+{{> info}}
+*/
+import { Application } from 'express';
+{{#apiInfo}}
+{{#apis}}
+import {{classVarName}}Router from './router/{{classVarName}}.router'
+{{/apis}}
+{{/apiInfo}}
+
+export default function routes(app: Application): void {
+{{#apiInfo}}
+{{#apis}}
+  app.use('/api/v1/', {{classVarName}}Router);
+{{/apis}}
+{{/apiInfo}}
+
+};
+
+
